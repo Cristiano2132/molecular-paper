@@ -185,10 +185,10 @@
 
 % =============================================================================
 % SECTIONS — modular inputs managed by Lead Scientist
+% Each section toggles between _en and _pt via \langversion
 % =============================================================================
 
 % --- 1. INTRODUCTION ---
-% Toggle between language modules via \langversion variable.
 \ifnum\pdfstrcmp{\langversion}{en}=0
     \input{modules/intro_en}
 \else
@@ -196,52 +196,98 @@
 \fi
 
 % --- 2. MATERIAL AND METHODS ---
-\input{modules/methods_en}
+\ifnum\pdfstrcmp{\langversion}{en}=0
+    \input{modules/methods_en}
+\else
+    \input{modules/methods_pt}
+\fi
 
 % --- 3. RESULTS ---
-\input{modules/results_en}
+\ifnum\pdfstrcmp{\langversion}{en}=0
+    \input{modules/results_en}
+\else
+    \input{modules/results_pt}
+\fi
 
 % --- 4. DISCUSSION ---
-\input{modules/discussion_en}
+\ifnum\pdfstrcmp{\langversion}{en}=0
+    \input{modules/discussion_en}
+\else
+    \input{modules/discussion_pt}
+\fi
 
 % --- 5. CONCLUSION ---
-\input{modules/conclusion_en}
+\ifnum\pdfstrcmp{\langversion}{en}=0
+    \input{modules/conclusion_en}
+\else
+    \input{modules/conclusion_pt}
+\fi
 
 % ---------------------------------------------------------------------------
 % ACKNOWLEDGEMENTS
 % ---------------------------------------------------------------------------
-\section*{Acknowledgements}
-The authors thank [Funding Agency] (Grant No. XXXX) for financial
-support, and the Bioinformatics Laboratory of [Institution] for
-computational infrastructure.
+\ifnum\pdfstrcmp{\langversion}{en}=0
+    \section*{Acknowledgements}
+    The authors thank [Funding Agency] (Grant No. XXXX) for financial
+    support, and the Bioinformatics Laboratory of [Institution] for
+    computational infrastructure.
+\else
+    \section*{Agradecimentos}
+    Os autores agradecem à [Agência de Fomento] (Processo n.º XXXX) pelo
+    apoio financeiro e ao Laboratório de Bioinformática de [Instituição]
+    pela infraestrutura computacional.
+\fi
 
 % ---------------------------------------------------------------------------
 % REFERENCES
 % ---------------------------------------------------------------------------
-\printbibliography[heading=bibintoc, title={References}]
+\ifnum\pdfstrcmp{\langversion}{en}=0
+    \printbibliography[heading=bibintoc, title={References}]
+\else
+    \printbibliography[heading=bibintoc, title={Referências}]
+\fi
 
 % ---------------------------------------------------------------------------
 % SUPPLEMENTARY MATERIAL
 % ---------------------------------------------------------------------------
 \clearpage
 \appendix
-\section{Supplementary Figures}
+
+\ifnum\pdfstrcmp{\langversion}{en}=0
+    \section{Supplementary Figures}
+\else
+    \section{Figuras Suplementares}
+\fi
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.85\textwidth]{../output/figures/test_plot.pdf}
     \caption{%
-        Boxplot of Polymorphism Information Content (\pic{}) and expected
-        heterozygosity (\he{}) for simulated \snp{} and \ssr{} markers
-        (\textit{n}~=~60). Horizontal lines indicate medians; boxes
-        represent the interquartile range (IQR); whiskers extend to
-        1.5\,×\,IQR; circles denote outliers. $\mu$ = group mean.
+        \ifnum\pdfstrcmp{\langversion}{en}=0
+            Boxplot of Polymorphism Information Content (\pic{}) and expected
+            heterozygosity (\he{}) for simulated \snp{} and \ssr{} markers
+            (\textit{n}~=~60). Horizontal lines indicate medians; boxes
+            represent the interquartile range (IQR); whiskers extend to
+            1.5\,×\,IQR; circles denote outliers. $\mu$ = group mean.
+        \else
+            Boxplot do Conteúdo de Informação sobre Polimorfismo (\pic{}) e
+            heterozigose esperada (\he{}) para marcadores \snp{} e \ssr{}
+            simulados (\textit{n}~=~60). As linhas horizontais indicam as
+            medianas; as caixas representam o intervalo interquartílico (IQR);
+            os bigodes se estendem a 1{,}5\,×\,IQR; círculos indicam
+            \textit{outliers}. $\mu$ = média do grupo.
+        \fi
     }
     \label{fig:pic_boxplot}
 \end{figure}
 
 \clearpage
-\section{Supplementary Tables}
+
+\ifnum\pdfstrcmp{\langversion}{en}=0
+    \section{Supplementary Tables}
+\else
+    \section{Tabelas Suplementares}
+\fi
 
 \input{../output/tables/marker_summary}
 
