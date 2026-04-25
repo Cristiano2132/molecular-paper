@@ -1,0 +1,151 @@
+# ==============================================================================
+#  AGENT SYSTEM : Multi-Agent Scientific Paper Workspace
+#  PROJECT      : Molecular Markers (SNP / SSR) — Genetic Diversity Analysis
+#  VERSION      : 0.1.0
+#  PLATFORM     : macOS
+# ==============================================================================
+
+# ---------------------------------------------------------------------------
+# AGENT REGISTRY
+# Each agent has a defined ROLE, PRIMARY LANGUAGE, and RESPONSIBILITY SCOPE.
+# ---------------------------------------------------------------------------
+agents:
+  lead_scientist:
+    name: "Lead Scientist"
+    role: "Orchestrator"
+    description: >
+      Manages document structure via LaTeX \input{} modules.
+      Controls language switching (PT-BR / EN) and ensures compliance
+      with target journal formatting guidelines.
+    responsibilities:
+      - "Maintain src/main.tex structure and module order"
+      - "Toggle \\langversion between 'en' and 'pt'"
+      - "Verify synchrony between intro_en.tex and intro_pt.tex"
+      - "Set journal-specific bibliography style in main.tex"
+    triggers:
+      - "Journal submission target changes"
+      - "Language version switch requested"
+      - "New section module added"
+
+  statistician:
+    name: "Statistician (Python Specialist)"
+    role: "Bioinformatics Data Pipeline"
+    description: >
+      Specialist in Bioinformatics statistics. Uses Python (pandas, numpy,
+      matplotlib) to simulate/process marker data, compute genetic diversity
+      statistics, and export figures (PDF) and tables (LaTeX).
+    responsibilities:
+      - "Maintain and execute scripts/plot_test.py"
+      - "Export figures to output/figures/ as PDF"
+      - "Export tables to output/tables/ as LaTeX .tex files"
+      - "Save raw data to output/data/ as CSV for reproducibility"
+    triggers:
+      - "Source data changes (data/ directory)"
+      - "New marker panel provided"
+      - "Statistical method update requested"
+    outputs:
+      figures: "output/figures/"
+      tables:  "output/tables/"
+      data:    "output/data/"
+
+  geneticist:
+    name: "Geneticist (Domain Expert)"
+    role: "Scientific Interpretation and Discussion Author"
+    description: >
+      Molecular genetics specialist. Interprets statistical results in
+      biological context and authors the Discussion section, translating
+      quantitative outputs into scientific narratives.
+    responsibilities:
+      - "Author src/modules/discussion_en.tex"
+      - "Review results_en.tex for biological accuracy"
+      - "Flag marker quality issues (null alleles, HWE departures)"
+      - "Suggest additional analyses based on results"
+    triggers:
+      - "Statistician outputs updated"
+      - "New species / population context provided"
+
+  latex_engineer:
+    name: "LaTeX Engineer"
+    role: "Document Compilation and Formatting"
+    description: >
+      Expert in LaTeX formatting and compilation via CLI on macOS.
+      Compatible with Texifier and pdflatex (TeX Live).
+      Manages the Makefile build system.
+    responsibilities:
+      - "Maintain Makefile build targets"
+      - "Resolve LaTeX compilation errors"
+      - "Manage bibliography compilation (biber)"
+      - "Ensure figure/table cross-references resolve correctly"
+      - "Handle EN/PT parallel PDF generation"
+    triggers:
+      - "Any .tex file is modified"
+      - "New figure or table added"
+      - "Journal formatting requirements change"
+    compile_command: "make"
+    pdf_output: "output/pdf/main.pdf"
+
+# ---------------------------------------------------------------------------
+# PROJECT STRUCTURE
+# ---------------------------------------------------------------------------
+project:
+  name: "Molecular Markers Genetic Diversity Paper"
+  version: "0.1.0"
+  languages: ["en", "pt-BR"]
+  active_language: "en"
+  target_journals:
+    - "Genetics and Molecular Biology"
+    - "Crop Breeding and Applied Biotechnology"
+    - "Molecular Plant Breeding"
+  bibliography_style: "authoryear"   # biblatex style
+
+directories:
+  src:        "src/"
+  modules:    "src/modules/"
+  scripts:    "scripts/"
+  output_pdf: "output/pdf/"
+  figures:    "output/figures/"
+  tables:     "output/tables/"
+  data:       "output/data/"
+  references: "references/"
+
+# ---------------------------------------------------------------------------
+# SYNCHRONISATION RULES (Lead Scientist Enforcement)
+# ---------------------------------------------------------------------------
+sync_rules:
+  - "intro_en.tex and intro_pt.tex must cover identical content"
+  - "Abstract in main.tex must be updated when introduction changes"
+  - "Output figures must be regenerated before recompiling LaTeX"
+  - "references.bib must include all \\autocite{} keys used in modules"
+
+# ---------------------------------------------------------------------------
+# PYTHON ENVIRONMENT
+# ---------------------------------------------------------------------------
+python:
+  version: ">=3.10"
+  dependencies:
+    - pandas
+    - numpy
+    - matplotlib
+  install_cmd: "pip install pandas numpy matplotlib"
+
+# ---------------------------------------------------------------------------
+# LATEX ENVIRONMENT
+# ---------------------------------------------------------------------------
+latex:
+  engine: "pdflatex"
+  bibliography: "biber"
+  packages_required:
+    - babel
+    - biblatex
+    - graphicx
+    - booktabs
+    - amsmath
+    - siunitx
+    - hyperref
+    - cleveref
+    - geometry
+    - fancyhdr
+    - lineno
+    - microtype
+    - lmodern
+  macos_install: "brew install --cask mactex"

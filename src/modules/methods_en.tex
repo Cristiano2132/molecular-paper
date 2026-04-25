@@ -1,0 +1,60 @@
+% =============================================================================
+% AGENT   : Statistician + Geneticist
+% MODULE  : Material and Methods — English
+% =============================================================================
+
+\section{Material and Methods}
+\label{sec:methods}
+
+\subsection{Marker Data Simulation}
+\label{sec:sim}
+
+To demonstrate the analytical pipeline, a dataset of 60 molecular markers
+was simulated using the Python programming language (v3.10+) with the
+\texttt{pandas} (v2.x) and \texttt{numpy} (v1.24+) libraries.
+The simulation comprised 36 \snp{} markers and 24 \ssr{} markers.
+
+Major allele frequencies ($p$) for \snp{} markers were sampled from a
+Beta distribution with shape parameters $\alpha = 6$, $\beta = 2$, yielding
+allele frequencies skewed towards common variants, consistent with
+empirical observations in crop genomes \autocite{Elshire2011}. For
+\ssr{} markers, frequencies were drawn from a symmetric Beta distribution
+($\alpha = \beta = 3$), reflecting the higher polymorphism expected for
+multiallelic loci modelled as biallelic equivalents.
+
+\subsection{Statistical Parameters}
+\label{sec:stats}
+
+For each marker, the following statistics were computed:
+
+\paragraph{Polymorphism Information Content.}
+Following \textcite{Botstein1980}, \pic{} was calculated as:
+\begin{equation}
+    \text{PIC} = 1 - \left(p^2 + q^2\right) - 2p^2q^2
+    \label{eq:pic}
+\end{equation}
+where $p$ and $q = 1 - p$ are the frequencies of the two alleles.
+
+\paragraph{Expected Heterozygosity.}
+Under Hardy--Weinberg equilibrium:
+\begin{equation}
+    H_e = 2pq
+    \label{eq:he}
+\end{equation}
+
+\paragraph{Observed Heterozygosity.}
+Simulated by adding Gaussian noise $\varepsilon \sim \mathcal{N}(0, 0.04)$
+to $H_e$, clipped to $[0, 1]$:
+\begin{equation}
+    H_o = \text{clip}\left(H_e + \varepsilon,\; 0,\; 1\right)
+    \label{eq:ho}
+\end{equation}
+
+\subsection{Data Visualisation}
+\label{sec:viz}
+
+Boxplots comparing \pic{} and \he{} between \snp{} and \ssr{} marker
+classes were generated with the \texttt{matplotlib} library (v3.7+) and
+exported as PDF files for direct inclusion in this document. All analyses
+are fully reproducible via the script \texttt{scripts/plot\_test.py}
+(random seed: 42).

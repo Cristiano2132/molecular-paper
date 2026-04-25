@@ -1,0 +1,54 @@
+% =============================================================================
+% AGENT   : Geneticist (Domain Expert) — PRIMARY AUTHOR OF THIS MODULE
+% MODULE  : Discussion — English
+% NOTE    : This module interprets results from the Statistician's outputs.
+%           Update whenever statistics are recalculated (Lead Scientist to verify).
+% =============================================================================
+
+\section{Discussion}
+\label{sec:discussion}
+
+The results obtained from the simulated marker panel align well with
+established expectations from the molecular marker literature. The
+consistently higher \pic{} and \he{} values observed for \ssr{} markers
+corroborate their recognised superiority in capturing polymorphism, a
+characteristic attributable to the stepwise mutation model governing
+microsatellite repeat evolution and the consequent accumulation of
+multiple alleles per locus \autocite{Ellegren2004}.
+
+\snp{} markers, while individually less informative due to their
+biallelic nature, compensate through sheer abundance across the
+genome. High-density \snp{} genotyping platforms can capture linkage
+disequilibrium patterns at fine resolution, enabling genome-wide
+association studies (GWAS) and genomic selection with accuracy
+surpassing that achievable with sparser \ssr{} panels
+\autocite{Goddard2007}. The trade-off between per-locus informativeness
+(\ssr{}) and marker density (\snp{}) should therefore be evaluated in
+the context of the specific application: parentage analysis and
+cultivar identification typically favour \ssr{}, while genomic
+prediction and QTL mapping at scale favour dense \snp{} arrays.
+
+The narrow distribution of $H_o$ values around $H_e$ in the simulated
+dataset indicates a population in approximate Hardy--Weinberg equilibrium,
+as expected given the absence of selection, drift, or inbreeding effects
+in the simulation model. In real populations, departures from this
+equilibrium may signal biological phenomena of interest, such as
+inbreeding depression, selection sweeps, or genotyping artefacts
+(e.g., null alleles in \ssr{} loci), which should be systematically
+tested prior to downstream analyses \autocite{Peakall2006}.
+
+Taken together, these findings reinforce the complementarity of \snp{}
+and \ssr{} marker systems. The modular analytical pipeline developed
+here, combining Python-based statistical computation with \LaTeX{}
+document generation, provides a reproducible and extensible framework
+for future marker characterisation studies.
+
+\subsection{Limitations and Future Directions}
+
+The present analysis is constrained by the use of simulated data and
+a biallelic model for \ssr{} loci, which underestimates their true
+polymorphism. Future work should incorporate empirical genotyping data
+from actual populations, employ multiallelic \pic{} formulations for
+\ssr{} markers \autocite{Anderson1993}, and extend the statistical
+framework to include $F$-statistics and population structure analyses
+(\textit{e.g.}, STRUCTURE, ADMIXTURE).

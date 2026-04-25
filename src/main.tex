@@ -1,0 +1,248 @@
+% =============================================================================
+% AGENT     : Lead Scientist (Orchestrator)
+% ROLE      : Main LaTeX entry-point. Manages document structure via \input{}.
+%             Handles language switching (PT-BR / EN) and journal compliance.
+% JOURNAL   : Generic template — adaptable to Molecular Plant Breeding,
+%             Genetics and Molecular Biology, Crop Breeding and Applied
+%             Biotechnology, etc.
+% COMPILER  : pdflatex (≥ TeX Live 2022) | Texifier (macOS)
+% USAGE     : Run `make` from project root, or compile with:
+%               pdflatex -output-directory=output/pdf src/main.tex
+% =============================================================================
+
+\documentclass[12pt, a4paper]{article}
+
+% ---------------------------------------------------------------------------
+% PACKAGES
+% ---------------------------------------------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+% --- Language Toggle ---
+% Comment/uncomment the desired language block before compiling.
+% The Lead Scientist agent controls this switch.
+
+% ----- ENGLISH version -----
+\usepackage[english]{babel}
+\newcommand{\langversion}{en}
+
+% ----- PORTUGUESE version (uncomment to activate) -----
+% \usepackage[brazil]{babel}
+% \newcommand{\langversion}{pt}
+
+% --- Typography ---
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{setspace}
+\usepackage{xcolor}      % required for color expressions like blue!60!black
+\usepackage{csquotes}    % recommended by biblatex when babel is loaded
+\onehalfspacing
+
+% --- Mathematics & Science ---
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{siunitx}
+\sisetup{separate-uncertainty=true}
+
+% --- Figures & Tables ---
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\captionsetup{
+    font=small,
+    labelfont=bf,
+    justification=centering,
+    skip=6pt
+}
+
+% --- References ---
+\usepackage[
+    backend=biber,
+    style=authoryear,
+    citestyle=authoryear,
+    sorting=nyt,
+    maxbibnames=10,
+    maxcitenames=2,
+    uniquename=false
+]{biblatex}
+\addbibresource{/Users/cristianooliveira/Documents/molecular_paper/references/references.bib}
+
+% --- Hyperlinks ---
+\usepackage[
+    colorlinks=true,
+    linkcolor=blue!60!black,
+    citecolor=blue!60!black,
+    urlcolor=blue!60!black
+]{hyperref}
+\usepackage{cleveref}
+
+% --- Layout ---
+\usepackage[
+    top=2.5cm, bottom=2.5cm,
+    left=3cm,  right=2.5cm
+]{geometry}
+
+% --- Headers ---
+\usepackage{fancyhdr}
+\setlength{\headheight}{14pt}   % suppress fancyhdr \headheight warning
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Molecular Markers Study}
+\fancyhead[R]{\small \thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% --- Line numbers (review mode) ---
+\usepackage{lineno}
+% \linenumbers   % uncomment for submission review mode
+
+% --- Custom commands ---
+\newcommand{\pic}{\textit{PIC}}
+\newcommand{\he}{\textit{H\textsubscript{e}}}
+\newcommand{\ho}{\textit{H\textsubscript{o}}}
+\newcommand{\snp}{\textsc{snp}}
+\newcommand{\ssr}{\textsc{ssr}}
+
+% =============================================================================
+% DOCUMENT
+% =============================================================================
+\begin{document}
+
+% ---------------------------------------------------------------------------
+% TITLE PAGE
+% ---------------------------------------------------------------------------
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+
+    {\LARGE\bfseries
+        Characterization of Molecular Markers (SNP/SSR) in
+        [Target Species]: Genetic Diversity, Heterozygosity, and
+        Polymorphism Information Content
+    \par}
+
+    \vspace{1.5cm}
+
+    {\large
+        Author One\textsuperscript{1},
+        Author Two\textsuperscript{1,2},
+        Author Three\textsuperscript{2}
+    \par}
+
+    \vspace{1cm}
+
+    {\normalsize
+        \textsuperscript{1} Department of Genetics and Plant Breeding,
+        [University Name], [City], [Country] \\[4pt]
+        \textsuperscript{2} [Second Affiliation]
+    \par}
+
+    \vspace{1cm}
+
+    {\normalsize
+        \textbf{Corresponding author:} Author One \\
+        \texttt{author.one@institution.edu}
+    \par}
+
+    \vspace{1.5cm}
+
+    {\normalsize
+        \textbf{Running title:} Molecular Marker Diversity Analysis \\[4pt]
+        \textbf{Keywords:} molecular markers; SNP; SSR; genetic diversity;
+        PIC; heterozygosity
+    \par}
+
+    \vfill
+    {\small Version: DRAFT — \today}
+\end{titlepage}
+
+% ---------------------------------------------------------------------------
+% ABSTRACT
+% ---------------------------------------------------------------------------
+\begin{abstract}
+    \noindent
+    % [Lead Scientist]: Select the abstract module matching \langversion.
+    % English abstract:
+    This study presents a preliminary characterization of simulated
+    Single Nucleotide Polymorphism (\snp{}) and Simple Sequence Repeat
+    (\ssr{}) molecular markers. Sixty markers were evaluated for
+    Polymorphism Information Content (\pic{}), expected heterozygosity
+    (\he{}), and observed heterozygosity (\ho{}). Results demonstrate
+    clear differences in informativeness between marker classes, with
+    \ssr{} markers exhibiting higher \pic{} values on average.
+    These findings provide a foundation for marker-assisted selection
+    programmes in [target species].
+
+    \vspace{0.5em}
+    \noindent\textbf{Keywords:} molecular markers; SNP; SSR; genetic
+    diversity; PIC; heterozygosity.
+\end{abstract}
+
+\newpage
+\tableofcontents
+\newpage
+
+% =============================================================================
+% SECTIONS — modular inputs managed by Lead Scientist
+% =============================================================================
+
+% --- 1. INTRODUCTION ---
+% Toggle between language modules via \langversion variable.
+\ifnum\pdfstrcmp{\langversion}{en}=0
+    \input{modules/intro_en}
+\else
+    \input{modules/intro_pt}
+\fi
+
+% --- 2. MATERIAL AND METHODS ---
+\input{modules/methods_en}
+
+% --- 3. RESULTS ---
+\input{modules/results_en}
+
+% --- 4. DISCUSSION ---
+\input{modules/discussion_en}
+
+% --- 5. CONCLUSION ---
+\input{modules/conclusion_en}
+
+% ---------------------------------------------------------------------------
+% ACKNOWLEDGEMENTS
+% ---------------------------------------------------------------------------
+\section*{Acknowledgements}
+The authors thank [Funding Agency] (Grant No. XXXX) for financial
+support, and the Bioinformatics Laboratory of [Institution] for
+computational infrastructure.
+
+% ---------------------------------------------------------------------------
+% REFERENCES
+% ---------------------------------------------------------------------------
+\printbibliography[heading=bibintoc, title={References}]
+
+% ---------------------------------------------------------------------------
+% SUPPLEMENTARY MATERIAL
+% ---------------------------------------------------------------------------
+\clearpage
+\appendix
+\section{Supplementary Figures}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{../output/figures/test_plot.pdf}
+    \caption{%
+        Boxplot of Polymorphism Information Content (\pic{}) and expected
+        heterozygosity (\he{}) for simulated \snp{} and \ssr{} markers
+        (\textit{n}~=~60). Horizontal lines indicate medians; boxes
+        represent the interquartile range (IQR); whiskers extend to
+        1.5\,×\,IQR; circles denote outliers. $\mu$ = group mean.
+    }
+    \label{fig:pic_boxplot}
+\end{figure}
+
+\clearpage
+\section{Supplementary Tables}
+
+\input{../output/tables/marker_summary}
+
+\end{document}

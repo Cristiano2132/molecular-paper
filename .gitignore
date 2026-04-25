@@ -1,0 +1,88 @@
+# =============================================================================
+# .gitignore — Molecular Paper Workspace
+# =============================================================================
+
+# --- Python ---
+.venv/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+*.egg
+dist/
+build/
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+.eggs/
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+*.ipynb
+
+# --- LaTeX auxiliary files ---
+output/pdf/*.aux
+output/pdf/*.log
+output/pdf/*.out
+output/pdf/*.toc
+output/pdf/*.bbl
+output/pdf/*.bcf
+output/pdf/*.blg
+output/pdf/*.fls
+output/pdf/*.fdb_latexmk
+output/pdf/*.run.xml
+output/pdf/*.synctex.gz
+output/pdf/*.lof
+output/pdf/*.lot
+output/pdf/*.idx
+output/pdf/*.ind
+output/pdf/*.ilg
+output/pdf/*.glg
+output/pdf/*.gls
+output/pdf/*.glo
+output/pdf/*.ist
+output/pdf/*.acn
+output/pdf/*.acr
+output/pdf/*.alg
+
+# Temp PT compilation file
+src/main_pt_tmp.tex
+
+# --- Generated PDF (compiled output — regenerate via `make`) ---
+output/pdf/*.pdf
+
+# --- Generated data/figures/tables (regenerate via `make figures`) ---
+# Keep .gitkeep files so empty dirs are tracked
+output/figures/*.pdf
+output/tables/*.tex
+output/data/*.csv
+
+# --- Raw data (pode conter dados sensíveis/proprietários) ---
+# Descomente se dados brutos NÃO devem ir para o repositório:
+# data/raw/
+
+# --- macOS ---
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+
+# --- Editors ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.claude/
+
+# --- Secrets / credentials ---
+.env
+*.key
+*.pem
+secrets.yaml
+.agent/

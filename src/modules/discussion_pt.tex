@@ -1,0 +1,55 @@
+% =============================================================================
+% AGENTE  : Geneticista (Especialista em Domínio) — AUTOR PRINCIPAL DESTE MÓDULO
+% MÓDULO  : Discussão — Português Brasileiro (discussion_pt.tex)
+% NOTA    : Tradução de discussion_en.tex — o conteúdo técnico é de
+%           responsabilidade do Geneticista; a tradução é do Cientista-Líder.
+% STATUS  : RASCUNHO
+% =============================================================================
+
+\section{Discussão}
+\label{sec:discussion}
+
+Os resultados obtidos com o painel simulado de marcadores estão em boa
+concordância com as expectativas estabelecidas na literatura de marcadores
+moleculares. Os valores consistentemente mais elevados de \pic{} e \he{}
+observados para os marcadores \ssr{} corroboram sua reconhecida superioridade
+na captura de polimorfismo, característica atribuível ao modelo de mutação
+em degraus que rege a evolução de repetições de microssatélites e ao
+consequente acúmulo de múltiplos alelos por locus \autocite{Ellegren2004}.
+
+Os marcadores \snp{}, embora individualmente menos informativos devido à sua
+natureza bialélica, compensam por sua abundância no genoma. Plataformas de
+genotipagem de alta densidade de \snp{} podem capturar padrões de
+desequilíbrio de ligação em alta resolução, viabilizando estudos de
+associação genômica ampla (GWAS) e seleção genômica com acurácia superior
+à alcançável com painéis mais esparsos de \ssr{} \autocite{Goddard2007}. O
+equilíbrio entre a informatividade por locus (\ssr{}) e a densidade de
+marcadores (\snp{}) deve, portanto, ser avaliado conforme a aplicação
+específica: análise de parentesco e identificação de cultivares tipicamente
+favorecem o \ssr{}, enquanto predição genômica e mapeamento de QTLs em
+escala favorecem matrizes densas de \snp{}.
+
+A distribuição estreita dos valores de $H_o$ em torno de $H_e$ no conjunto
+de dados simulado indica uma população em equilíbrio de Hardy--Weinberg
+aproximado, conforme esperado dada a ausência de seleção, deriva ou
+endogamia no modelo de simulação. Em populações reais, desvios desse
+equilíbrio podem sinalizar fenômenos biológicos de interesse, como depressão
+por endogamia, varreduras seletivas ou artefatos de genotipagem (por exemplo,
+alelos nulos em locos \ssr{}), os quais devem ser sistematicamente testados
+antes das análises subsequentes \autocite{Peakall2006}.
+
+Em conjunto, esses resultados reforçam a complementaridade dos sistemas de
+marcadores \snp{} e \ssr{}. O pipeline analítico modular desenvolvido aqui,
+combinando computação estatística em Python com geração de documentos
+\LaTeX{}, fornece um arcabouço reprodutível e extensível para estudos
+futuros de caracterização de marcadores.
+
+\subsection{Limitações e Perspectivas Futuras}
+
+A presente análise é limitada pelo uso de dados simulados e por um modelo
+bialélico para os locos \ssr{}, que subestima seu verdadeiro polimorfismo.
+Trabalhos futuros devem incorporar dados de genotipagem empírica de
+populações reais, empregar formulações multialélicas de \pic{} para
+marcadores \ssr{} \autocite{Anderson1993}, e estender o arcabouço
+estatístico para incluir estatísticas $F$ e análises de estrutura
+populacional (\textit{e.g.}, STRUCTURE, ADMIXTURE).

@@ -1,0 +1,50 @@
+% =============================================================================
+% AGENT   : Lead Scientist + Geneticist (Domain Expert)
+% MODULE  : Introduction — English version (intro_en.tex)
+% SYNCED  : Must be consistent with intro_pt.tex (Lead Scientist responsibility)
+% STATUS  : DRAFT
+% =============================================================================
+
+\section{Introduction}
+\label{sec:intro}
+
+The characterisation of genetic diversity is a cornerstone of plant
+breeding, conservation genetics, and evolutionary biology
+\autocite{Hamrick1989}. Molecular markers have become indispensable
+tools for evaluating diversity at the genomic level, enabling
+researchers to identify polymorphisms with high precision, reproducibility,
+and throughput \autocite{Semagn2006}.
+
+Among the marker technologies currently available, Single Nucleotide
+Polymorphisms (\snp{}) and Simple Sequence Repeats (\ssr{}) are the
+most widely employed. \snp{} markers represent the most abundant class
+of genetic variation in any genome and are amenable to high-throughput
+genotyping platforms such as SNP arrays and genotyping-by-sequencing
+(GBS) \autocite{Elshire2011}. \ssr{} markers, also known as
+microsatellites, are highly polymorphic, co-dominant, and have been
+extensively validated in numerous crop species, making them valuable
+for genetic mapping, parentage analysis, and variety identification
+\autocite{Powell1996}.
+
+The informativeness of a marker locus is commonly quantified using the
+Polymorphism Information Content (\pic{}), first proposed by
+\textcite{Botstein1980}. The \pic{} value ranges from 0 (monomorphic)
+to a theoretical maximum approaching 0.5 for biallelic markers, with
+values above 0.5 generally considered highly informative for multiallelic
+loci. Expected (\he{}) and observed (\ho{}) heterozygosity are
+complementary statistics that reflect the distribution of allelic
+frequencies within a population and deviations from Hardy--Weinberg
+equilibrium, respectively.
+
+Despite extensive application of both marker classes in the literature,
+comparative analyses of their discriminatory power under standardised
+simulation conditions remain underexplored. Understanding the relative
+performance of \snp{} and \ssr{} markers in terms of \pic{} and
+heterozygosity is essential for designing efficient genotyping strategies
+in future studies.
+
+The present study aims to (i)~simulate a representative panel of
+\snp{} and \ssr{} markers with biologically plausible allele frequency
+distributions; (ii)~compute \pic{}, \he{}, and \ho{} for each marker
+class; and (iii)~provide a visual and statistical comparison to inform
+marker selection criteria in applied breeding programmes.

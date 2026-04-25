@@ -1,0 +1,64 @@
+% =============================================================================
+% AGENTE  : Cientista-Líder + Statistician (descrição do pipeline)
+% MÓDULO  : Material e Métodos — Português Brasileiro (methods_pt.tex)
+% SINCRON.: Deve ser consistente com methods_en.tex
+% STATUS  : RASCUNHO
+% =============================================================================
+
+\section{Material e Métodos}
+\label{sec:methods}
+
+\subsection{Simulação de Dados de Marcadores}
+\label{sec:sim}
+
+Para demonstrar o pipeline analítico, um conjunto de dados composto por
+60 marcadores moleculares foi simulado utilizando a linguagem de programação
+Python (v3.10+) com as bibliotecas \texttt{pandas} (v2.x) e
+\texttt{numpy} (v1.24+). A simulação compreendeu 36 marcadores \snp{} e
+24 marcadores \ssr{}.
+
+As frequências do alelo principal ($p$) para os marcadores \snp{} foram
+amostradas a partir de uma distribuição Beta com parâmetros de forma
+$\alpha = 6$ e $\beta = 2$, gerando frequências alélicas enviesadas em
+direção às variantes mais comuns, de forma consistente com observações
+empíricas em genomas de plantas cultivadas \autocite{Elshire2011}. Para
+os marcadores \ssr{}, as frequências foram obtidas de uma distribuição
+Beta simétrica ($\alpha = \beta = 3$), refletindo o maior polimorfismo
+esperado para locos multialélicos modelados como equivalentes bialélicos.
+
+\subsection{Parâmetros Estatísticos}
+\label{sec:stats}
+
+Para cada marcador, foram calculadas as seguintes estatísticas:
+
+\paragraph{Conteúdo de Informação sobre Polimorfismo.}
+Seguindo \textcite{Botstein1980}, o \pic{} foi calculado como:
+\begin{equation}
+    \text{PIC} = 1 - \left(p^2 + q^2\right) - 2p^2q^2
+    \label{eq:pic}
+\end{equation}
+onde $p$ e $q = 1 - p$ são as frequências dos dois alelos.
+
+\paragraph{Heterozigose Esperada.}
+Sob o equilíbrio de Hardy--Weinberg:
+\begin{equation}
+    H_e = 2pq
+    \label{eq:he}
+\end{equation}
+
+\paragraph{Heterozigose Observada.}
+Simulada pela adição de ruído gaussiano $\varepsilon \sim \mathcal{N}(0; 0,04)$
+a $H_e$, limitado ao intervalo $[0, 1]$:
+\begin{equation}
+    H_o = \text{clip}\left(H_e + \varepsilon,\; 0,\; 1\right)
+    \label{eq:ho}
+\end{equation}
+
+\subsection{Visualização dos Dados}
+\label{sec:viz}
+
+Boxplots comparando \pic{} e \he{} entre as classes de marcadores \snp{} e
+\ssr{} foram gerados com a biblioteca \texttt{matplotlib} (v3.7+) e exportados
+como arquivos PDF para inclusão direta neste documento. Todas as análises são
+totalmente reprodutíveis por meio do script \texttt{scripts/plot\_test.py}
+(semente aleatória: 42).
